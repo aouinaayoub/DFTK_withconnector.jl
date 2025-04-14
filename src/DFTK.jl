@@ -104,6 +104,7 @@ export AtomicLocal
 export LocalNonlinearity
 export Hartree
 export Xc
+export Connector
 export AtomicNonlocal
 export Ewald
 export PspCorrection
