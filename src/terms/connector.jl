@@ -9,7 +9,7 @@ struct Connector end
 struct TermConnector <: Term
 end 
 
-# HEG funtions from Libxc: Hexc , Hvxc, Hfxc 
+# HEG functions from Libxc: Hexc , Hvxc, Hfxc 
 function get_Hexc_Hvxc_Hfxc(ρ::Array{Float64})
     lda_x= Libxc.Functional(:lda_x)
     res_lda_x = Libxc.evaluate(lda_x, rho=reshape(ρ, 1,size(ρ,1),size(ρ,2),size(ρ,3)), derivatives=[0,1,2]) 
@@ -38,7 +38,7 @@ function get_Hexc_Hvxc_Hfxc(ρ::Float64)
 end
 
 # Corradini fxc -----------------------------------------------------  
-function diffvc(n)  # like that it doesn't support multidimensional Array 
+function diffvc(n)  # add support to multidimensional Array 
     lda_c= Libxc.Functional(:lda_c_pz)
     res_lda_c = Libxc.evaluate(lda_c, rho=[n], derivatives=[0,1,2])
     return res_lda_c.v2rho2[1] 
