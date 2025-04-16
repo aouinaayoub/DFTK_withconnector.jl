@@ -129,7 +129,7 @@ function get_cot_density(ρ::Array{Float64}, basis::PlaneWaveBasis{T}) where {T}
     r_vectors_cart_= r_vectors_cart(basis) 
     nbar= mean(ρ)
     nbar_sing=nbar
-	ncon = Vector{Float64}(undef, fft_size^3)  # [ (sum(fxc_corradini(ρ, basis, vp ) .* ρ) * basis.dvol) for vp in r_vectors(basis) ]
+    ncon = Vector{Float64}(undef, fft_size^3)  
     list_of_idx = [(i, j, k) for i in 1:fft_size, j in 1:fft_size, k in 1:fft_size] 
     dvol = basis.dvol
     lattice = basis.model.lattice
@@ -155,13 +155,6 @@ function get_cot_density(ρ::Array{Float64}, basis::PlaneWaveBasis{T}) where {T}
     #print( "ncon is not nan? ", !(any(isnan, res)), "mean ncon " , mean(res))  
     return res 
 end
-
-function meshgrid(x, y, z)
-    return ([k for i in x, j in y, k in z],
-            [j for i in x, j in y, k in z],
-            [i for i in x, j in y, k in z])
-end 
-
 
 function get_norm_rdiff(r_local,r_idx, fft_size, lattice)
     # Initial parameters
